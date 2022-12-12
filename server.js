@@ -1,4 +1,5 @@
 const express = require("express")
+const banco = require("./dbConfig.js")
 // const dados = require("./db.json")
 //const fs = require('fs')//ja esta definido no outro arquivo
 const app = express()
@@ -6,7 +7,7 @@ const app = express()
 //const userController = require('./controllers/userController.js')
 const Router = require('./routes/Router.js')
 
-
+app.use(express.json())
 
 
 //let dados =[]
@@ -48,9 +49,21 @@ const Router = require('./routes/Router.js')
 //enviado para Router.js
 //app.post("/users", userController.postarDados)
 
+function conectarBanco(){
+    banco.connect(function (err,result){
+        if(err){
+            console.log(err)
+        }else{
+            console.log(result)
+        }
+    })
+}
+
+
 app.use('/users', Router)
 
 app.listen(3000, function () {
+    conectarBanco()
     console.log("Servidor conectado")
 })
 

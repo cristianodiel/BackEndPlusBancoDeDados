@@ -8,13 +8,7 @@ const banco = mysql.createConnection({
     database: "aula"
 })
 
-    banco.connect(function(err,result){
-        if(err){
-            console.log(err)
-        }else{
-            console.log(result)
-        }
-    })
+
     function createDatabase(nome){
         const query = `CREATE DATABASE ${nome}`
         banco.query(query), function(err,result){
@@ -49,5 +43,5 @@ const banco = mysql.createConnection({
     }
     insertCadastro("fulano",32)
     
-    
+    module.exports = banco
     
